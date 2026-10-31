@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ .Description | default site.Params.description }}">
+  <link rel="stylesheet" href="{{ "css/site.css" | relURL }}">
+  {{ with .OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }}">{{ end }}
+</head>
+<body>
+  <header>
+    <a class="brand" href="{{ "/" | relURL }}">{{ site.Title }}</a>
+    <nav>
+      {{ range site.Menus.main }}<a href="{{ .URL }}">{{ .Name }}</a>{{ end }}
+    </nav>
+  </header>
+  <main>{{ block "main" . }}{{ end }}</main>
+  <footer>
+    <a href="https://github.com/heroicode">GitHub</a> · <a href="{{ "blog/index.xml" | relURL }}">RSS</a>
+  </footer>
+</body>
+</html>
